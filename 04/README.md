@@ -88,12 +88,6 @@ npm install art-template --save
 npm install express-art-template --save
 ```
 
-
-
-
-
-
-
 # 1.3 修改完代码自动重启
 
 - 第三方工具	`nodemon`  基于Node.js开发的第三方命令行工具 需要独立安装
@@ -110,6 +104,82 @@ npm install express-art-template --save
   # 
   nodemon app.js
   ```
+
++ 配置
+
+  ```javascript
+  // 当渲染以.art结尾的文件的时候 使用art-template模板引擎
+  app.engine('html', require('express-art-template'))
+  ```
+
++ 使用
+
+  ```javascript
+  // 去views目录下寻找
+  app.get('/admin', function (req, res) {
+      // res.render('404.html')
+      res.render('admin/index.html', {
+          title : 'admin'
+      })
+  })
+  ```
+
++ 修改视图渲染的存储目录
+
+  ```javascript
+  // 修改默认的views目录 
+  app.set('views',render函数的默认路径)
+  ```
+
+# 1.4 Express中获取表单post请求体数据
+
++ 安装`body-parser`中间件
+
+  ```shell
+  npm install body-parser --save
+  ```
+
++ 配置
+
+  ```javascript
+  var express = require('express')
+  var bodyParser = require('body-parser')
+  
+  var app = express()
+  
+  // parse application/x-www-form-urlencoded
+  app.use(bodyParser.urlencoded({ extended: false }))
+  
+  // parse application/json
+  app.use(bodyParser.json())
+  
+  app.post('/post', function (req, res) { 
+      // req.query 只能拿到get的数据
+      // 在Express中 获取请求体数据
+      // console.log(req.body)
+      var comment = req.body
+      comment.datetime = Date.now.toString()
+      comments.unshift(comment)
+  
+      res.redirect('/')
+  })
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
