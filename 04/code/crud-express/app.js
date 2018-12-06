@@ -1,5 +1,11 @@
+/**
+ * app.js就是入口模块
+ */
+
 var express = require('express')
-var fs = require('fs')
+var router = require('./router')
+var bodyParser = require('body-parser')
+
 
 var app = express()
 
@@ -9,25 +15,15 @@ app.use('/public/',express.static('./public/'))
 
 app.engine('html',require('express-art-template'))
 
-app.get('/', function (req, res) { 
-    // 传入utf8编码专程我们能够认识的字符
-    // 除了这样转换也可以使用data.toString()
-    fs.readFile('./db.json', 'utf8', function (err, data) {
-        if (err) { 
-            return res.status(500).send('Server error')
-        }
-        // res.send('/')
-        
-        // 字符串转成json格式
-        var students = JSON.parse(data).students
+// 配置模板引擎和body-parser 一定要在app,use(router)之前配置
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 
-        res.render('index.html', {
-            students: students
-        })
-    })
-
-})
-
+// router(app)
+// 把路由容器挂载到app服务中
+app.use(router)
 
 app.listen(3000, function () { 
     console.log('server is running...')

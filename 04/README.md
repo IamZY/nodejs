@@ -147,24 +147,107 @@ npm install express-art-template --save
   
   var app = express()
   
-  // parse application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded({ extended: false }))
-  
-  // parse application/json
-  app.use(bodyParser.json())
-  
   app.post('/post', function (req, res) { 
       // req.query 只能拿到get的数据
       // 在Express中 获取请求体数据
       // console.log(req.body)
       var comment = req.body
-      comment.datetime = Date.now.toString()
+      comment.datetime = Date.now.toString() 
       comments.unshift(comment)
   
       res.redirect('/')
   })
   ```
 
++ 路由设计
+
+   `router.js`文件单触处理路由信息
+
+  ```javascript
+  /**
+   * 路由模块
+   */
+  var fs = require('fs')
+  // Express 提供更好的方式
+  // 专门封装路由
+  var express = require('express')
+  // 创建一个路由容器
+  var router = express.Router()
+  
+  router.get('/students', function (req, res) {
+      // 传入utf8编码专程我们能够认识的字符
+      // 除了这样转换也可以使用data.toString()
+      fs.readFile('./db.json', 'utf8', function (err, data) {
+          if (err) {
+              return res.status(500).send('Server error')
+          }
+          // res.send('/')
+          // 字符串转成json格式
+          var students = JSON.parse(data).students
+          res.render('index.html', {
+              students: students
+          })
+      })
+  })
+  
+  router.get('/students/new', function (req, res) {
+      res.render('new.html')
+  })
+  
+  router.post('/students/new', function (req, res) {
+      // 获得前台提交的数据
+      // console.log(req.body)
+      // 将数据db.json文件中 持久化数据的存储
+      
+      // 先读取db中的对象 再往对象中插入数据 再将对象写入文件
+      
+  
+  
+      // 重定向学生信息列表页
+      res.redirect('/students')
+  })
+  
+  router.get('/students/edit', function (req, res) {
+  
+  })
+  
+  router.post('/students/edit', function (req, res) {
+  
+  })
+  
+  router.get('/students/delete', function (req, res) {
+  
+  })
+  
+  router.post('/students/delete', function (req, res) {
+  
+  })
+  
+  // 导出router接口
+  module.exports = router
+  
+  
+   
+  ```
+
++ 设计数据操作的模块
+
+# 1.5 回调函数:获取异步操作的结果
+
+```javascript
+function fn(callback) { 
+    // var callback = function(data){}
+    setTimeout(function () { 
+        var data = 'hello'
+        callback(data)
+    } ,3000)
+}
+
+// 如果需要获取一个函数中异步操作的结果 必须通过回调函数获取
+fn(function (data) { 
+    console.log(data)
+})
+```
 
 
 

@@ -1,10 +1,1 @@
-{
-    "students":[
-        {"id":1,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},
-        {"id":2,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},
-        {"id":3,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},
-        {"id":4,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},
-        {"id":5,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},
-        {"id":6,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"}
-    ]
-}
+{"students":[{"id":1,"name":"张小三","gender":0,"age":18,"hobbies":"eat,sleep,code"},{"id":2,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},{"id":3,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},{"id":4,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},{"id":5,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},{"id":6,"name":"张三","gender":0,"age":18,"hobbies":"eat,sleep,code"},{"name":"aaaaaaaaaa","gender":"0","age":"11","hobbies":"123","id":7},{"name":"hhh","gender":"0","age":"55","hobbies":"eeer","id":8}]}
