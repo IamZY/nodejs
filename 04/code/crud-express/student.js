@@ -36,7 +36,7 @@ exports.findById = function (id, callback) {
         var students = JSON.parse(data.toString()).students
 
         var stu = students.find(function (item) { 
-            return item.id === id
+            return item.id === parseInt(id)
         })
 
         callback(null,stu)
@@ -92,13 +92,15 @@ exports.updateById = function (student,callback) {
         // Es6中的数组方法
         // 当某个遍历项符 条件的时候 find会终止遍历 返回遍历项
         var stu = students.find(function (item) {
-            return item.id === student.id
+            return item.id === parseInt(student.id)
         })
 
+        
         for (var key in student) { 
             stu[key] = student[key]
         }
         
+        stu.id = parseInt(student.id)
 
         var ret = JSON.stringify({
             students: students
@@ -118,6 +120,34 @@ exports.updateById = function (student,callback) {
 /**
  * 删除学生
  */
-exports.delete = function () {
+exports.deleteById = function (id,callback) {
+    fs.readFile(dbPath, function (err, data) {
+        if (err) {
+            return callback(err)
+        }
+        var students = JSON.parse(data.toString()).students
 
+        // Es6中的数组方法
+        // findIndex专门查找元素的下标
+        var deleteId = students.findIndex(function (item) { 
+            return item.id === parseInt(id)
+        })
+
+        // 将学生的信息 根据下标删除学生信息
+        students.splice(deleteId,1)
+
+        var ret = JSON.stringify({
+            students: students
+        })
+
+        fs.writeFile(dbPath, ret, function (err) {
+            if (err) {
+                return callback(err)
+            }
+
+            callback(null)
+        })
+
+        // JSON.parse(data).students
+    })
 }

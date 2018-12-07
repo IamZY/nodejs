@@ -95,15 +95,29 @@ router.get('/students/edit', function (req, res) {
 })
 
 router.post('/students/edit', function (req, res) {
+    // 获取表单数据
+    // console.log(req.body)
+    var student = req.body
+    // 保存更新
+    Student.updateById(student, function (err) { 
+        if (err) { 
+            res.status(500).send('Server error')
+        }
 
+        res.redirect('/students')
+    })
+    // 发送响应
 })
 
 router.get('/students/delete', function (req, res) {
+    // console.log(req.body)
+    Student.deleteById(req.body.id, function (err) { 
+        if (err) { 
+            res.status(500).send('Server error')
+        }
 
-})
-
-router.post('/students/delete', function (req, res) {
-
+        res.redirect('/students')
+    })
 })
 
 // 导出router接口
