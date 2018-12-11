@@ -308,6 +308,71 @@ get('data.json', function (data) {
   })
   ```
 
+## 1.5 node-mysql
+
++ 安装
+
+  ```shell
+  npm install mysql --save
+  ```
+
++ 操作
+
+  ```javascript
+  var mysql = require('mysql');
+  
+  // 连接数据库
+  var connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '123456',
+      database: 'itcast'
+  });
+  
+  connection.connect();
+  
+  connection.query('select * from users', function (error, results, fields) {
+      if (error) throw error;
+      console.log('The solution is: ', results[0].solution);
+  });
+  
+  // 关闭连接
+  connection.end();
+  ```
+
+## 1.6 Promise
+
++ 回调地狱
+
+  ```javascript
+  var fs = require('fs')
+  
+  fs.readFile('./data/a.txt', 'utf8' ,function (err, data) { 
+      if (err) { 
+          throw err
+      }
+      console.log(data)
+  })
+  
+  
+  fs.readFile('./data/b.txt', 'utf8', function (err, data) {
+      if (err) {
+          throw err
+      }
+      console.log(data)
+  })
+  
+  
+  fs.readFile('./data/c.txt', 'utf8', function (err, data) {
+      if (err) {
+          throw err
+      }
+      console.log(data)
+  })
+  ```
+
++ 回调嵌套
+
 
 
 

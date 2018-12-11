@@ -65,12 +65,19 @@ router.post('/students/new', function (req, res) {
     // 将数据db.json文件中 持久化数据的存储
     
     // 先读取db中的对象 再往对象中插入数据 再将对象写入文件
-    var student = req.body
-    Student.save(student, function (err) {
-        if (err) { 
+    // var student = req.body
+
+    new Student(req.body).save(function (err) {
+        if (err) {
             return res.status(500).send('Server error')
         }
     })
+
+    // Student.save(student, function (err) {
+    //     if (err) { 
+    //         return res.status(500).send('Server error')
+    //     }
+    // })
 
     // 重定向学生信息列表页
     res.redirect('/students')
@@ -82,7 +89,7 @@ router.get('/students/edit', function (req, res) {
     //     student : Student.findById(req.query.id)
     // })
 
-    Student.findById(parseInt(req.query.id), function (err, student) {
+    Student.findById(req.query.id, function (err, student) {
         if (err) { 
             return res.status(500).send("Server error")
         }        
@@ -99,7 +106,7 @@ router.post('/students/edit', function (req, res) {
     // console.log(req.body)
     var student = req.body
     // 保存更新
-    Student.updateById(student, function (err) { 
+    Student.findByIdAndUpdate(student.id, student, function (err) { 
         if (err) { 
             res.status(500).send('Server error')
         }
@@ -110,8 +117,11 @@ router.post('/students/edit', function (req, res) {
 })
 
 router.get('/students/delete', function (req, res) {
+    // console.log(req.body.id)
     // console.log(req.body)
-    Student.deleteById(req.body.id, function (err) { 
+    // console.log(id)
+    console.log(req.body)
+    Student.findByIdAndRemove(req.body.id, function (err) { 
         if (err) { 
             res.status(500).send('Server error')
         }

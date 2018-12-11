@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 var Schema = mongoose.Schema
 
-mongoose.connect('mongodb://localhost:itcast')
+mongoose.connect('mongodb://localhost/itcast')
 
 
 var studentSchema = new Schema({
