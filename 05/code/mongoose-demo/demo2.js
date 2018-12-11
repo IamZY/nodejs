@@ -97,10 +97,10 @@ var admin = new User({
 // 更新
 User.findByIdAndUpdate('5c0bc8df0f004911082cc5ce', {
     passWord: '123'
-}, function (err, ret) { 
+}, function (err, ret) {
     if (err) {
         console.log(err)
-    } else { 
+    } else {
         console.log(ret)
     }
 })
