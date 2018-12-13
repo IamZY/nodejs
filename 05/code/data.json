@@ -1,7 +1,26 @@
 {
     "users": [
         {
-            "username": "admin",
+            "id": 1,
+            "username": "admin1",
+            "age": 18,
+            "job": 2
+        },
+        {
+            "id": 2,
+            "username": "admin2",
+            "age": 18,
+            "job": 2
+        },
+        {
+            "id": 3,
+            "username": "admin3",
+            "age": 18,
+            "job": 2
+        },
+        {
+            "id": 4,
+            "username": "admin4",
             "age": 18,
             "job": 2
         }
